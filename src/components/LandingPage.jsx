@@ -46,7 +46,7 @@ const LandingPage = () => {
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
                         >
-                            OBTENEZ VOTRE PROGRAMME
+                            OBTIENS TON PROGRAMME
                         </motion.button>
                     </div>
                 </div>
