@@ -7,3 +7,9 @@ html, body {
   padding: 0;
 }
 
+
+.custom-gradient {
+  background: 
+      linear-gradient(to right, black, transparent 10%, transparent 90%, black),
+      linear-gradient(to bottom, black, transparent 10%, transparent 90%, black);
+}
