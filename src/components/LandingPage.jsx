@@ -1,6 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import Results from './Results';
+import VideoTestimonials from './VideoTestimonials';
+import Footer from './Footer';
 
 const LandingPage = () => {
     return (
@@ -16,41 +19,46 @@ const LandingPage = () => {
                     </ul>
                 </nav>
             </header>
-            <main className="container mx-auto px-6 py-12 relative">
-                <div className="flex items-center justify-between">
-                    <motion.div
-                        className="w-1/2 relative"
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <div className="absolute inset-0 custom-gradient z-10"></div>
-                        <img
-                            src="/assets/Anis-superhero-2.png"
-                            alt="Corps de Superhéros"
-                            className="w-full object-cover"
-                        />
-                    </motion.div>
-                    <div className="w-1/2 pl-12">
-                        <motion.h1
-                            className="text-6xl font-bold mb-6"
-                            initial={{ x: 100, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
+            <main>
+                <section className="container mx-auto px-6 py-12 relative">
+                    <div className="flex items-center justify-between">
+                        <motion.div
+                            className="w-1/2 relative"
+                            initial={{ y: 100, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.8 }}
                         >
-                            Construis un corps de superhéros
-                        </motion.h1>
-                        <motion.button
-                            className="bg-yellow-500 text-black px-8 py-3 rounded-md text-lg font-semibold hover:bg-yellow-600 transition duration-300"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
-                        >
-                            OBTIENS TON PROGRAMME
-                        </motion.button>
+                            <div className="absolute inset-0 custom-gradient z-10"></div>
+                            <img
+                                src="/assets/Anis-hero-2.jpg"
+                                alt="Corps de Superhéros"
+                                className="w-full object-cover"
+                            />
+                        </motion.div>
+                        <div className="w-1/2 pl-12">
+                            <motion.h1
+                                className="text-6xl font-bold mb-6"
+                                initial={{ x: 100, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 0.8 }}
+                            >
+                                Construis le corps de tes rêves
+                            </motion.h1>
+                            <motion.button
+                                className="bg-yellow-500 text-black px-8 py-3 rounded-md text-lg font-semibold hover:bg-yellow-600 transition duration-300"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.8, delay: 0.4 }}
+                            >
+                                OBTIENS TON PROGRAMME
+                            </motion.button>
+                        </div>
                     </div>
-                </div>
+                </section>
+                <Results />
+                <VideoTestimonials />
             </main>
+            <Footer />
         </div>
     );
 };
