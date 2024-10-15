@@ -1,11 +1,19 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { motion, useAnimation, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Results from './Results';
 import VideoTestimonials from './VideoTestimonials';
 import Footer from './Footer';
+import WhoAmI from './WhoAmI';
+
+
 
 const LandingPage = () => {
+    const heroRef = useRef(null);
+    const isInView = useInView(heroRef, { once: false, amount: 0.3 });
+
+
+
     return (
         <div className="min-h-screen bg-black text-white">
             <header className="bg-black py-4 px-6 flex justify-between items-center">
@@ -20,12 +28,13 @@ const LandingPage = () => {
                 </nav>
             </header>
             <main>
-                <section className="container mx-auto px-6 py-12 relative">
+                {/* Hero Section */}
+                <section ref={heroRef} className="container mx-auto px-6 py-12 relative">
                     <div className="flex items-center justify-between">
                         <motion.div
                             className="w-1/2 relative"
-                            initial={{ y: 100, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                             transition={{ duration: 0.8 }}
                         >
                             <div className="absolute inset-0 custom-gradient z-10"></div>
@@ -38,8 +47,9 @@ const LandingPage = () => {
                         <div className="w-1/2 pl-12">
                             <motion.h1
                                 className="text-6xl font-bold mb-6"
-                                initial={{ x: 100, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
+
+                                initial={{ opacity: 0, x: 200 }}
+                                animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.8 }}
                             >
                                 Construis le corps de tes rêves
@@ -55,7 +65,14 @@ const LandingPage = () => {
                         </div>
                     </div>
                 </section>
+
+                {/* Who Am I Section */}
+                <WhoAmI />
+
+                {/* Results Section */}
                 <Results />
+
+                {/* Video Testimonials Section */}
                 <VideoTestimonials />
             </main>
             <Footer />
