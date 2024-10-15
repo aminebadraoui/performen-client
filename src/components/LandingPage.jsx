@@ -50,7 +50,7 @@ const LandingPage = () => {
 
                                 initial={{ opacity: 0, x: 200 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.8 }}
+                                transition={{ duration: 0.8, delay: 0.4 }}
                             >
                                 Construis le corps de tes rêves
                             </motion.h1>
