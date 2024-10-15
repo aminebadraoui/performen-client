@@ -121,7 +121,7 @@ const Results = () => {
     return (
         <section className="bg-black py-16">
             <div className="container mx-auto px-6">
-                <h2 className="text-4xl font-bold text-center mb-12 text-white">RÉSULTATS</h2>
+                <h2 className="text-4xl font-bold text-center mb-12 text-yellow-500">RÉSULTATS</h2>
                 <div className="relative overflow-hidden">
                     <motion.div
                         className="flex"
