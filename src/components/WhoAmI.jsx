@@ -27,7 +27,7 @@ const WhoAmI = () => {
                 >
                     <div className="absolute inset-0 custom-gradient z-10"></div>
                     <img
-                        src="/assets/Anis-rings.jpg"
+                        src="/assets/Anis-Rings.jpg"
                         alt="Anis sur les anneaux"
                         className="w-full object-cover"
                     />
