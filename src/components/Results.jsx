@@ -104,8 +104,13 @@ const results = [
 const Results = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const resultsPerPage = 3;
-    const totalPages = Math.ceil(results.length / resultsPerPage);
+    const resultsPerPage = {
+        sm: 1,
+        md: 2,
+        lg: 3
+    };
+
+    const totalPages = Math.ceil(results.length / resultsPerPage.lg);
 
     const nextSlide = () => {
         setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, totalPages - 1));
@@ -130,7 +135,7 @@ const Results = () => {
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                     >
                         {results.map((result, index) => (
-                            <div key={index} className="w-1/3 flex-shrink-0 px-4 flex">
+                            <div key={index} className="w-full sm:w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4 flex">
                                 <div className="bg-gray-950 rounded-lg overflow-hidden p-4 flex flex-col flex-1">
                                     <div className="flex justify-between mb-4 flex-shrink-0">
                                         <img src={result.beforeImage} alt="Avant" className="w-[48%] object-cover" />
@@ -167,6 +172,6 @@ const Results = () => {
             </div>
         </section>
     );
-};
+}
 
 export default Results;

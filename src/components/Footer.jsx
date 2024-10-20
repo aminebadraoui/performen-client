@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="flex flex-wrap justify-between">
                     <div className="w-full md:w-1/4 mb-6 md:mb-0">
                         <img src="/assets/logo.webp" alt="Logo Performen" className="h-12 mb-4" />
-                        <p className="text-sm">Construisez le corps de vos rêves avec Performen</p>
+                        <p className="text-sm">Construis le corps de tes rêves avec Performen</p>
                     </div>
                     <div className="w-full md:w-1/4 mb-6 md:mb-0">
                         <h3 className="text-lg font-semibold mb-4">Liens Rapides</h3>

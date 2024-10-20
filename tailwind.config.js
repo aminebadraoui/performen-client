@@ -13,6 +13,10 @@ module.exports = {
       colors: {
         'primary': colors.cyan,
       },
+      fontFamily: {
+        sans: ['Montserrat', 'sans-serif'],
+      },
+
     },
   },
   plugins: [
