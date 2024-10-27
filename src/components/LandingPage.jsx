@@ -9,16 +9,100 @@ import TimeToTakeAction from './TimeToTakeAction';
 import ContactForm from './ContactForm';
 import CalendlyModal from './CalendlyModal';
 import useModalStore from '../stores/useModalStore';
+import useStaticContentStore from '../stores/useStaticContentStore';
+import { createDirectus, rest, readItem, staticToken, graphql } from '@directus/sdk';
+
+const directus = createDirectus('http://143.198.172.101:3104')
+    .with(graphql())
+    .with(staticToken('5HMWhxqRyt6QfOn8XKuAKQ7VsgLTETi3'));
 
 
+const HOMEPAGE_QUERY = {
+    query: `
+        query {
+            pages(filter: { title: { _eq: "Home" } }) {
+                id
+                title
+                builder {
+                    collection
+                    item {
+                        ... on hero_block {
+                            id
+                            title
+                            image
+                            cta_text
+                        }
+                        ... on title_section {
+                            id
+                            title
+                            subtitle
+                        }
+                    }
+                }
+            }
+        }
+    `
+};
 
 const LandingPage = () => {
     const heroRef = useRef(null);
     const isInView = useInView(heroRef, { once: false, amount: 0.3 });
 
     const { isCalendlyOpen, openCalendly, closeCalendly } = useModalStore();
+    const [pageContent, setPageContent] = useState(null);
 
+    const directus_asset_url = 'http://143.198.172.101:3104/assets'
 
+    useEffect(() => {
+        const getStaticContent = async () => {
+            try {
+                const response = await directus.query(`
+                    query {
+                        pages_by_id(id: "e9f805fd-2ad4-4f0d-bedf-87e18dac2417") {
+                            id
+                            title
+                            builder {
+                                collection
+                                item {
+                                    ... on hero_block {
+                                       id
+                                       headline
+                                       main_image {
+                                        id
+                                        location
+                                        filename_download
+                                       }
+                                       content
+                                       cta_title
+                                       cta_link
+                                    }
+                                    ... on title_section {
+                                        id
+                                        title
+                                     
+                                    }
+                                }
+                            }
+                        }
+                    }
+                `);
+
+                console.log('GraphQL response:', response.pages_by_id);
+
+                if (response.pages_by_id) {
+                    console.log('Page content:', response.pages_by_id);
+
+                    setPageContent(response.pages_by_id);
+                    console.log(pageContent)
+
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        getStaticContent();
+    }, []);
 
     return (
         <div className="min-h-screen bg-black text-white overflow-x-hidden">
@@ -46,6 +130,7 @@ const LandingPage = () => {
             <main>
                 {/* Hero Section */}
 
+
                 <section ref={heroRef} className="container mx-auto px-6 py-12 md:py-24 relative">
                     <div className="flex flex-col md:flex-row items-center justify-between">
                         <motion.div
@@ -55,10 +140,16 @@ const LandingPage = () => {
                             transition={{ duration: 0.8 }}
                         >
                             <div className="absolute inset-0 custom-gradient z-10"></div>
+
                             <img
-                                src="/assets/Anis-hero-2.jpg"
+                                src="http://143.198.172.101:3104/assets/441cfa04-ca35-434b-a117-9e0440be83ee"
                                 alt="Corps de Superhéros"
                                 className="w-full object-cover"
+
+                                onError={(e) => {
+                                    console.error('Image failed to load:', e);
+
+                                }}
                             />
                         </motion.div>
                         <div className="w-full md:w-1/2 md:pl-12">
@@ -68,7 +159,7 @@ const LandingPage = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.4 }}
                             >
-                                Construis le corps de tes rêves
+                                {pageContent?.builder[0].item.headline}
                             </motion.h1>
                             <motion.button
                                 className="bg-yellow-500 text-black px-8 py-3 rounded-md text-lg font-semibold hover:bg-yellow-600 transition duration-300"
@@ -77,7 +168,7 @@ const LandingPage = () => {
                                 transition={{ duration: 0.8, delay: 0.6 }}
                                 onClick={openCalendly}
                             >
-                                Réserve ta consultation
+                                {pageContent?.builder[0].item.cta_title}
                             </motion.button>
                         </div>
                     </div>
