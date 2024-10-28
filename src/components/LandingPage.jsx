@@ -32,11 +32,7 @@ const HOMEPAGE_QUERY = {
                             image
                             cta_text
                         }
-                        ... on title_section {
-                            id
-                            title
-                            subtitle
-                        }
+                     
                     }
                 }
             }
@@ -76,11 +72,7 @@ const LandingPage = () => {
                                        cta_title
                                        cta_link
                                     }
-                                    ... on title_section {
-                                        id
-                                        title
-                                     
-                                    }
+                                  
                                 }
                             }
                         }
