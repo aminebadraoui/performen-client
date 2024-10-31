@@ -134,7 +134,7 @@ const LandingPage = () => {
                             <div className="absolute inset-0 custom-gradient z-10"></div>
 
                             <img
-                                src="http://143.198.172.101:3104/assets/441cfa04-ca35-434b-a117-9e0440be83ee"
+                                src="/assets/anis-hero-2.jpg"
                                 alt="Corps de Superhéros"
                                 className="w-full object-cover"
 
@@ -151,7 +151,8 @@ const LandingPage = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.4 }}
                             >
-                                {pageContent?.builder[0].item.headline}
+                                {/* {pageContent?.builder[0].item.headline} */}
+                                Construis le corps de tes rêves
                             </motion.h1>
                             <motion.button
                                 className="bg-yellow-500 text-black px-8 py-3 rounded-md text-lg font-semibold hover:bg-yellow-600 transition duration-300"
@@ -160,7 +161,8 @@ const LandingPage = () => {
                                 transition={{ duration: 0.8, delay: 0.6 }}
                                 onClick={openCalendly}
                             >
-                                {pageContent?.builder[0].item.cta_title}
+                                {/* {pageContent?.builder[0].item.cta_title} */}
+                                Réserve ta consultation
                             </motion.button>
                         </div>
                     </div>
