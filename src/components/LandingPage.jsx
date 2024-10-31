@@ -134,14 +134,9 @@ const LandingPage = () => {
                             <div className="absolute inset-0 custom-gradient z-10"></div>
 
                             <img
-                                src="/assets/anis-hero-2.jpg"
+                                src="/assets/anis-hero-rings.jpg"
                                 alt="Corps de Superhéros"
                                 className="w-full object-cover"
-
-                                onError={(e) => {
-                                    console.error('Image failed to load:', e);
-
-                                }}
                             />
                         </motion.div>
                         <div className="w-full md:w-1/2 md:pl-12">
