@@ -24,40 +24,7 @@ const LandingPage = () => {
 
     const { isCalendlyOpen, openCalendly, closeCalendly } = useModalStore();
     const [pageContent, setPageContent] = useState(null);
-    const [headerContent, setHeaderContent] = useState(null);
 
-    useEffect(() => {
-        const getHeaderContent = async () => {
-            try {
-                const response = await directus.query(`
-                    query {
-                        header_by_id(id: 1) {
-                           id
-                           logo_image {
-                             id
-                             filename_disk
-                             filename_download
-                           }
-                           links 
-                           logo_text
-                           cta_label
-                           cta_url
-                        }
-                    }
-                `);
-
-                console.log('response', response);
-
-                if (response.header_by_id) {
-                    setHeaderContent(response.header_by_id);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
-
-        getHeaderContent();
-    }, []);
 
     useEffect(() => {
         const getPageContent = async () => {
@@ -105,45 +72,6 @@ const LandingPage = () => {
 
     return (
         <div className="min-h-screen bg-black text-white overflow-x-hidden">
-            <header className="bg-black py-4 px-4 sm:px-6">
-                <div className="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto">
-                    {headerContent?.logo_image && (
-                        <img
-                            src={`https://performen-dashboard.mnfstagency.com/assets/${headerContent.logo_image.filename_disk}`}
-                            alt="Logo Performen"
-                            className="h-16 md:h-20 mb-4 md:mb-0"
-
-                            loading="eager"
-                            onError={(e) => {
-                                console.error('Error loading image:', e);
-                                console.log('Image source:', e.target.src);
-                            }}
-                        />
-                    )}
-                    <nav className="mb-4 md:mb-0">
-                        <ul className="flex flex-wrap justify-center space-x-2 sm:space-x-4 md:space-x-8">
-                            {headerContent?.links?.map((link, index) => (
-                                <li key={index}>
-                                    <Link
-                                        to={link.link_url || '/'}
-                                        className="hover:text-yellow-500"
-                                    >
-                                        {link.link_text}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
-                    <motion.button
-                        className="bg-yellow-500 text-black px-4 py-2 rounded-md font-semibold hover:bg-yellow-600 transition duration-300"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={openCalendly}
-                    >
-                        {headerContent?.cta_label || 'Réserve ta consultation'}
-                    </motion.button>
-                </div>
-            </header>
 
             {pageContent && (
                 <main>
