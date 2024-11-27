@@ -7,9 +7,34 @@ import BlogList from './components/BlogList';
 import BlogPost from './components/BlogPost';
 import Layout from './components/Layout';
 import useAuthStore from './stores/useAuthStore';
+import { useEffect } from 'react';
+import '@n8n/chat/style.css';
+import { createChat } from '@n8n/chat';
 
 function App() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  useEffect(() => {
+    createChat({
+      webhookUrl: 'https://mnfst-n8n.mnfstagency.com/webhook/348b2a80-feaa-43ef-8c23-6fc76eff1475/chat',
+      i18n: {
+        en: {
+          title: 'Bienvenue sur Performen',
+          subtitle: "Commence une conversation. Nous sommes là pour t'aider 24/7.",
+          footer: '',
+          getStarted: 'Nouvelle Conversation',
+          inputPlaceholder: 'Ta question..',
+        },
+      },
+      initialMessages: [
+        'Allo! 👋',
+        "C'est Nathan de la team Performen, comment puis-je t'aider aujourd'hui?"
+      ],
+
+
+    });
+  }, []);
+
 
   return (
     <Router>

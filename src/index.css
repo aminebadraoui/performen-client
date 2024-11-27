@@ -35,3 +35,24 @@ h2 {
       linear-gradient(to right, black, transparent 10%, transparent 90%, black),
       linear-gradient(to bottom, black, transparent 10%, transparent 90%, black);
 }
+
+.n8n-chat .chat-window-toggle {
+  background-color: #EAB305 !important;
+}
+
+.n8n-chat .chat-header {
+  background-color: #0F1417 !important;
+}
+
+.chat-window-wrapper .chat-window  {
+  border: none !important;
+}
+
+.n8n-chat .chat-input-send-button:not(:disabled) {
+  color: #EAB305 !important;
+}
+
+.n8n-chat .chat-message.chat-message-from-user:not(.chat-message-transparent) {
+  background-color: #0F1417 !important;
+}
+

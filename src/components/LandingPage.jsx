@@ -135,10 +135,10 @@ const LandingPage = () => {
                     <TimeToTakeAction openCalendly={openCalendly} />
 
                     {/* Results Section */}
-                    <Results />
+                    {/* <Results />
 
                     {/* Video Testimonials Section */}
-                    <VideoTestimonials />
+                    {/* <VideoTestimonials /> */} */}
 
                     {/* Contact Form Section */}
                     <ContactForm />

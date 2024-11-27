@@ -54,7 +54,7 @@ const WhoAmI = () => {
                     </motion.div>
                 </div>
 
-                <div className="flex flex-col md:flex-row-reverse items-center justify-between">
+                {/* <div className="flex flex-col md:flex-row-reverse items-center justify-between">
                     <motion.div
                         className="w-full md:w-1/2 md:pl-12 mb-8 md:mb-0"
                         initial={{ opacity: 0, x: 50 }}
@@ -96,7 +96,7 @@ const WhoAmI = () => {
                             className="w-full object-cover"
                         />
                     </motion.div>
-                </div>
+                </div> */}
             </div>
         </section>
     );
