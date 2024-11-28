@@ -51,12 +51,12 @@ const Header = () => {
 
     return (
         <header className="bg-black py-4 px-4 sm:px-6">
-            <div className="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto px-6">
                 {headerContent?.logo_image && (
                     <img
                         src={`https://performen-dashboard.mnfstagency.com/assets/${headerContent.logo_image.filename_disk}`}
                         alt="Logo Performen"
-                        className="h-16 md:h-20 mb-4 md:mb-0 cursor-pointer"
+                        className="h-16  md:h-20 mb-4 md:mb-0 cursor-pointer"
 
                         loading="eager"
                         onError={(e) => {

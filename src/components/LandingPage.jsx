@@ -11,7 +11,8 @@ import CalendlyModal from './CalendlyModal';
 import useModalStore from '../stores/useModalStore';
 import useStaticContentStore from '../stores/useStaticContentStore';
 import { createDirectus, rest, readItem, staticToken, graphql } from '@directus/sdk';
-
+import SkoolComponent from './SkoolComponent';
+import Community from './Community';
 const directus = createDirectus('https://performen-dashboard.mnfstagency.com')
     .with(graphql())
     .with(staticToken('Zwr4a6GH6F5pwhCGW1CcbNFVs-uIM7R6'));
@@ -138,7 +139,13 @@ const LandingPage = () => {
                     {/* <Results />
 
                     {/* Video Testimonials Section */}
-                    {/* <VideoTestimonials /> */} */}
+                    {/* <VideoTestimonials /> */}
+
+                    {/* Community Section */}
+                    <Community />
+
+
+
 
                     {/* Contact Form Section */}
                     <ContactForm />
