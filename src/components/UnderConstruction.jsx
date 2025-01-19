@@ -32,7 +32,7 @@ const UnderConstruction = () => {
                     transition={{ delay: 0.2 }}
                     className="text-3xl font-bold text-gray-950 mb-4 text-center"
                 >
-                    En Construction
+                    En Construction test
                 </motion.h1>
                 <motion.p
                     initial={{ opacity: 0 }}
