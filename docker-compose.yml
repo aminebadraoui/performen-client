@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  performen-client:
+    container_name: performen-client
+    image: aminebadraoui/performen-client:prod
+    volumes:
+      - performen_content:/app/public # Mount content volume to public directory
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      # Main website
+      - "traefik.http.routers.performen.rule=Host(`performen.ca`)"
+      - "traefik.http.routers.performen.entrypoints=websecure"
+      - "traefik.http.routers.performen.tls=true"
+      - "traefik.http.routers.performen.tls.certresolver=letsencrypt"
+      - "traefik.http.services.performen.loadbalancer.server.port=80"
+      # HTTP to HTTPS redirect
+      - "traefik.http.routers.performen-http.rule=Host(`performen.ca`)"
+      - "traefik.http.routers.performen-http.entrypoints=web"
+      - "traefik.http.routers.performen-http.middlewares=https-redirect"
+      - "traefik.http.middlewares.https-redirect.redirectscheme.scheme=https"
+    restart: unless-stopped
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  performen_content:
+    name: performen_content # Named volume for easier management
