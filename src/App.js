@@ -37,7 +37,7 @@ function App() {
       <Routes>
         <Route path="/password" element={<UnderConstruction />} />
 
-        {/* Protected routes with Layout test*/}
+        {/* Protected routes with Layout testt*/}
         <Route element={isUnlocked ? <Layout /> : <Navigate to="/password" replace />}>
           <Route path="/" element={<LandingPage />} />
           <Route path="/blog" element={<BlogList />} />
