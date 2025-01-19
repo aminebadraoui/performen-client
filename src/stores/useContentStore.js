@@ -24,11 +24,12 @@ const defaultContent = {
 
 const useContentStore = create((set, get) => ({
     content: defaultContent,
-    isLoading: false,
+    isLoading: true,
     error: null,
 
     // Load content from external source if available
     loadContent: async () => {
+        set({ isLoading: true });
         try {
             // Try to load from external content.json
             const response = await fetch('/content.json');
@@ -46,7 +47,7 @@ const useContentStore = create((set, get) => ({
 
     // Update content section
     updateContent: async (page, section, field, value) => {
-        const currentContent = get().content;
+        const currentContent = get().content || defaultContent;
         const newContent = {
             ...currentContent,
             pages: {
