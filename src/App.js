@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import UnderConstruction from './components/UnderConstruction';
@@ -7,12 +7,11 @@ import BlogList from './components/BlogList';
 import BlogPost from './components/BlogPost';
 import Layout from './components/Layout';
 import useAuthStore from './stores/useAuthStore';
-import { useEffect } from 'react';
 import '@n8n/chat/style.css';
 import { createChat } from '@n8n/chat';
 
 function App() {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isUnlocked = useAuthStore((state) => state.isUnlocked);
 
   useEffect(() => {
     createChat({
@@ -30,11 +29,8 @@ function App() {
         'Allo! 👋',
         "C'est Nathan de la team Performen, comment puis-je t'aider aujourd'hui?"
       ],
-
-
     });
   }, []);
-
 
   return (
     <Router>
@@ -42,7 +38,7 @@ function App() {
         <Route path="/password" element={<UnderConstruction />} />
 
         {/* Protected routes with Layout */}
-        <Route element={isAuthenticated ? <Layout /> : <Navigate to="/password" replace />}>
+        <Route element={isUnlocked ? <Layout /> : <Navigate to="/password" replace />}>
           <Route path="/" element={<LandingPage />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />

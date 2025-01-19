@@ -1,14 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from './Header'; // We'll create this next
+import Header from './Header';
+import AdminToggle from './AdminToggle';
 
 const Layout = () => {
     return (
-        <div className="min-h-screen bg-black">
+        <div>
+            <AdminToggle />
             <Header />
-            <main>
-                <Outlet />
-            </main>
+            <Outlet />
         </div>
     );
 };

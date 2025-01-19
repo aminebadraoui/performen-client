@@ -6,12 +6,12 @@ import useAuthStore from '../stores/useAuthStore';
 const UnderConstruction = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
+    const setIsUnlocked = useAuthStore((state) => state.setIsUnlocked);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password === 'invictus') {
-            setIsAuthenticated(true);
+            setIsUnlocked(true);
             navigate('/');
         } else {
             alert('Incorrect password');
