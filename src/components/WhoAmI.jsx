@@ -1,60 +1,54 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React from 'react';
+import { Box, Container, VStack, HStack, useColorModeValue } from '@chakra-ui/react';
 import useContentStore from '../stores/useContentStore';
 import EditableText from './EditableText';
 import EditableImage from './EditableImage';
 
 const WhoAmI = () => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: false, amount: 0.1 });
     const { content, updateContent } = useContentStore();
     const pageContent = content.pages.landing;
+    const bgColor = useColorModeValue('gray.50', 'gray.900');
+    const textColor = useColorModeValue('gray.900', 'gray.100');
 
     const handleContentSave = (field, value) => {
         updateContent('landing', 'whoami', field, value);
     };
 
     return (
-        <div className="bg-white">
-            <section ref={ref} className="container bg-white mx-auto px-6 py-12 relative">
-                <EditableText
-                    content={pageContent.whoami.title}
-                    onSave={(value) => handleContentSave('title', value)}
-                    className="text-4xl font-bold text-center mb-12 text-yellow-500"
-                />
-
-                <div className="flex flex-col space-y-16">
-                    <div className="flex flex-col md:flex-row items-center justify-between">
-                        <motion.div
-                            className="w-full md:w-1/2 md:pr-12 mb-8 md:mb-0 flex items-center"
-                            initial={{ opacity: 0, x: -50 }}
-                            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            <EditableText
-                                content={pageContent.whoami.content}
-                                onSave={(value) => handleContentSave('content', value)}
-                                className="text-lg text-gray-950 whitespace-pre-wrap"
-                            />
-                        </motion.div>
-                        <motion.div
-                            className="w-full md:w-1/2 flex items-center"
-                            initial={{ opacity: 0, y: 50 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            <div className="aspect-[4/3] relative w-full">
-                                <EditableImage
-                                    content={pageContent.whoami.image}
-                                    onSave={(value) => handleContentSave('image', value)}
-                                    className="w-full h-full object-cover rounded-lg shadow-lg"
-                                />
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-        </div>
+        <Box as="section" bg={bgColor} py={{ base: 16, md: 24 }}>
+            <Container maxW="container.xl" px={6}>
+                <HStack spacing={12} align="center" justify="space-between">
+                    <VStack flex={1} align="start" spacing={6}>
+                        <EditableText
+                            content={pageContent.whoami.title}
+                            onSave={(value) => handleContentSave('title', value)}
+                            fontSize="4xl"
+                            fontWeight="bold"
+                            color={textColor}
+                            as="h2"
+                        />
+                        <EditableText
+                            content={pageContent.whoami.content}
+                            onSave={(value) => handleContentSave('content', value)}
+                            fontSize="lg"
+                            color={textColor}
+                            whiteSpace="pre-wrap"
+                        />
+                    </VStack>
+                    <Box flex={1} maxW="400px" position="relative">
+                        <EditableImage
+                            content={pageContent.whoami.image}
+                            onSave={(value) => handleContentSave('image', value)}
+                            objectFit="cover"
+                            w="full"
+                            aspectRatio={4 / 3}
+                            borderRadius="xl"
+                            boxShadow="xl"
+                        />
+                    </Box>
+                </HStack>
+            </Container>
+        </Box>
     );
 };
 

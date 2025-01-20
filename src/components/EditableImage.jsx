@@ -1,17 +1,58 @@
 import React, { useState, useCallback } from 'react';
+import {
+    Box,
+    Button,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    Image,
+    VStack,
+    Text,
+    useColorModeValue,
+    IconButton,
+    Center,
+    Input,
+    HStack
+} from '@chakra-ui/react';
+import { AddIcon } from '@chakra-ui/icons';
+import { FiEdit2 } from 'react-icons/fi';
 import useAuthStore from '../stores/useAuthStore';
-import { Cloudinary } from "@cloudinary/url-gen";
 
-const cld = new Cloudinary({
-    cloud: {
-        cloudName: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME
-    }
-});
+const ImagePlaceholder = ({ onClick, isDragging, isAdmin }) => {
+    const bgColor = useColorModeValue('gray.100', 'gray.800');
+    const borderColor = useColorModeValue('gray.200', 'gray.700');
+    const iconColor = useColorModeValue('gray.400', 'gray.600');
+
+    return (
+        <Box
+            w="full"
+            h="full"
+            bg={bgColor}
+            borderWidth={2}
+            borderStyle="dashed"
+            borderColor={isDragging ? 'yellow.500' : borderColor}
+            borderRadius="xl"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            position="relative"
+            transition="all 0.2s"
+            cursor={isAdmin ? "pointer" : "default"}
+            onClick={isAdmin ? onClick : undefined}
+        >
+            <Text fontSize="4xl" color={iconColor}>+</Text>
+        </Box>
+    );
+};
 
 const EditableImage = ({
     content,
     onSave,
-    className = ''
+    objectFit = "cover",
+    ...props
 }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [value, setValue] = useState(content);
@@ -19,7 +60,11 @@ const EditableImage = ({
     const [isDragging, setIsDragging] = useState(false);
     const isAdmin = useAuthStore((state) => state.isAdmin);
 
-    console.log('EditableImage content:', content); // Debug log
+    const buttonBg = useColorModeValue('yellow.400', 'yellow.500');
+    const buttonHoverBg = useColorModeValue('yellow.500', 'yellow.600');
+    const placeholderBg = useColorModeValue('gray.100', 'gray.700');
+    const defaultBorderColor = useColorModeValue('gray.200', 'gray.600');
+    const borderColor = isDragging ? buttonBg : defaultBorderColor;
 
     const hasValidImage = content && content.trim() !== '';
 
@@ -30,10 +75,10 @@ const EditableImage = ({
         try {
             const formData = new FormData();
             formData.append('file', file);
-            formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+            formData.append('upload_preset', 'performen');
 
             const response = await fetch(
-                `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
+                'https://api.cloudinary.com/v1_1/dqvdgvqli/image/upload',
                 {
                     method: 'POST',
                     body: formData,
@@ -55,7 +100,9 @@ const EditableImage = ({
         e.preventDefault();
         setIsDragging(false);
         const file = e.dataTransfer.files[0];
-        handleFile(file);
+        if (file && file.type.startsWith('image/')) {
+            handleFile(file);
+        }
     }, []);
 
     const handleDragOver = useCallback((e) => {
@@ -68,108 +115,153 @@ const EditableImage = ({
         setIsDragging(false);
     }, []);
 
-    const handleImageUpload = (e) => {
-        const file = e.target.files[0];
-        handleFile(file);
+    const handleImageUpload = () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        };
+        input.click();
     };
-
-    const ImagePlaceholder = () => (
-        <div className={`bg-[#1a1f2e] w-full h-full flex items-center justify-center ${className}`}>
-            <div className="text-[#4a5568] text-sm">+</div>
-        </div>
-    );
 
     // Non-admin view
     if (!isAdmin) {
         return hasValidImage ? (
-            <img src={content} alt="" className={`w-full h-full object-cover ${className}`} />
+            <Image src={content} alt="" objectFit={objectFit} {...props} />
         ) : (
-            <ImagePlaceholder />
+            <ImagePlaceholder
+                onClick={handleImageUpload}
+                isDragging={isDragging}
+                isAdmin={isAdmin}
+            />
         );
     }
 
     // Admin view
     return (
-        <div className="relative h-full">
+        <Box position="relative" h="full">
             {hasValidImage ? (
-                <img src={content} alt="" className={`w-full h-full object-cover ${className}`} />
+                <Box position="relative">
+                    <Image src={content} alt="" objectFit={objectFit} {...props} />
+                    <IconButton
+                        icon={<FiEdit2 />}
+                        position="absolute"
+                        top={4}
+                        right={4}
+                        onClick={handleImageUpload}
+                        bg={buttonBg}
+                        color="black"
+                        _hover={{ bg: buttonHoverBg }}
+                        size="sm"
+                        aria-label="Edit image"
+                    />
+                </Box>
             ) : (
-                <div className="relative h-full">
-                    <ImagePlaceholder />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <button
-                            onClick={() => setIsEditing(true)}
-                            className="bg-yellow-500 text-black px-4 py-2 rounded-lg text-lg font-semibold hover:bg-yellow-600 transition-colors"
-                        >
-                            Add Image
-                        </button>
-                    </div>
-                </div>
+                <ImagePlaceholder
+                    onClick={handleImageUpload}
+                    isDragging={isDragging}
+                    isAdmin={isAdmin}
+                />
             )}
-            {isEditing && (
-                <div className="fixed inset-0 z-[100] bg-black bg-opacity-75 flex items-center justify-center p-8">
-                    <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                        <div className="p-8">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                                {hasValidImage ? 'Edit Image' : 'Add Image'}
-                            </h3>
-                            <div
-                                className={`relative border-4 border-dashed rounded-xl transition-colors ${isDragging ? 'border-yellow-500 bg-yellow-50' : 'border-gray-300 hover:border-yellow-300'}`}
-                                onDrop={handleDrop}
-                                onDragOver={handleDragOver}
-                                onDragLeave={handleDragLeave}
-                            >
-                                <div className="p-8 flex flex-col items-center">
-                                    {value ? (
-                                        <img
-                                            src={value}
-                                            alt=""
-                                            className="max-h-[50vh] object-contain mb-8"
-                                        />
-                                    ) : (
-                                        <div className="w-full aspect-video bg-gray-100 flex flex-col items-center justify-center mb-8 rounded-lg">
-                                            <div className="text-6xl text-gray-400 mb-4 font-light">+</div>
-                                            <div className="text-gray-400 text-xl">No image selected</div>
-                                        </div>
-                                    )}
-                                    <div className="text-center">
-                                        <label className="cursor-pointer inline-block bg-yellow-500 text-black px-6 py-3 rounded-lg text-lg font-semibold hover:bg-yellow-600 transition-colors">
-                                            Choose Image
-                                            <input
-                                                type="file"
-                                                accept="image/*"
-                                                onChange={handleImageUpload}
-                                                className="hidden"
-                                                disabled={isUploading}
-                                            />
-                                        </label>
-                                        <p className="mt-4 text-base text-gray-600">
-                                            or drag and drop an image here
-                                        </p>
-                                    </div>
-                                </div>
-                                {isUploading && (
-                                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
-                                        <div className="text-yellow-500 text-xl font-semibold">Uploading...</div>
-                                    </div>
+
+            <Modal isOpen={isEditing} onClose={() => setIsEditing(false)} size="2xl">
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>
+                        {hasValidImage ? 'Edit Image' : 'Add Image'}
+                    </ModalHeader>
+                    <ModalBody>
+                        <Box
+                            borderWidth={2}
+                            borderStyle="dashed"
+                            borderColor={borderColor}
+                            borderRadius="xl"
+                            transition="all 0.2s"
+                            _hover={{ borderColor: buttonBg }}
+                            onDrop={handleDrop}
+                            onDragOver={handleDragOver}
+                            onDragLeave={handleDragLeave}
+                            position="relative"
+                            p={8}
+                        >
+                            <VStack spacing={6}>
+                                {value ? (
+                                    <Image
+                                        src={value}
+                                        alt=""
+                                        maxH="400px"
+                                        objectFit="contain"
+                                    />
+                                ) : (
+                                    <Center
+                                        w="full"
+                                        h="300px"
+                                        bg={placeholderBg}
+                                        borderRadius="lg"
+                                    >
+                                        <VStack spacing={4}>
+                                            <AddIcon boxSize={12} color="gray.400" />
+                                            <Text color="gray.500">No image selected</Text>
+                                        </VStack>
+                                    </Center>
                                 )}
-                            </div>
-                        </div>
-                        <div className="bg-gray-50 px-8 py-4 rounded-b-xl flex justify-end gap-4">
-                            <button
+                                <VStack spacing={2}>
+                                    <Button
+                                        as="label"
+                                        cursor="pointer"
+                                        bg={buttonBg}
+                                        color="black"
+                                        _hover={{ bg: buttonHoverBg }}
+                                        px={8}
+                                    >
+                                        Choose Image
+                                        <Input
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={handleImageUpload}
+                                            hidden
+                                            disabled={isUploading}
+                                        />
+                                    </Button>
+                                    <Text fontSize="sm" color="gray.500">
+                                        or drag and drop an image here
+                                    </Text>
+                                </VStack>
+                            </VStack>
+                            {isUploading && (
+                                <Center
+                                    position="absolute"
+                                    inset={0}
+                                    bg="blackAlpha.600"
+                                    borderRadius="xl"
+                                >
+                                    <Text color="white" fontWeight="semibold">
+                                        Uploading...
+                                    </Text>
+                                </Center>
+                            )}
+                        </Box>
+                    </ModalBody>
+                    <ModalFooter>
+                        <HStack spacing={4}>
+                            <Button
                                 onClick={() => {
                                     setValue(content);
                                     setIsEditing(false);
                                 }}
-                                className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-300 transition-colors"
+                                variant="ghost"
                             >
                                 Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </div>
+                            </Button>
+                        </HStack>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+        </Box>
     );
 };
 
