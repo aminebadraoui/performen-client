@@ -1,74 +1,45 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { Box, Container, VStack, Button, useColorModeValue } from '@chakra-ui/react';
+import useModalStore from '../stores/useModalStore';
 import useContentStore from '../stores/useContentStore';
-import useAuthStore from '../stores/useAuthStore';
-import SkoolComponent from './SkoolComponent';
 import EditableText from './EditableText';
+import SkoolComponent from './SkoolComponent';
 
 const Community = () => {
+    const { openCalendly } = useModalStore();
     const { content, updateContent } = useContentStore();
+    const buttonBg = useColorModeValue('yellow.400', 'yellow.500');
+    const buttonHoverBg = useColorModeValue('yellow.500', 'yellow.600');
     const pageContent = content.pages.landing;
-    const [isEditing, setIsEditing] = useState(false);
-    const [editValue, setEditValue] = useState('');
-    const [editField, setEditField] = useState('');
 
     const handleContentSave = (field, value) => {
         updateContent('landing', 'community', field, value);
     };
 
     return (
-        <section className="bg-white py-20">
-            <div className="container mx-auto px-6 text-center">
-                <div className="relative inline-block group">
+        <Box as="section" py={{ base: 16, md: 24 }}>
+            <Container maxW="container.xl" px={6}>
+                <VStack spacing={12}>
                     <EditableText
                         content={pageContent.community.title}
                         onSave={(value) => handleContentSave('title', value)}
-                        className="text-4xl font-bold mb-8 text-yellow-500"
+                        fontSize="4xl"
+                        fontWeight="bold"
+                        color="yellow.400"
+                        textAlign="center"
                     />
-                </div>
-                <div className="relative inline-block group">
                     <EditableText
                         content={pageContent.community.subtitle}
                         onSave={(value) => handleContentSave('subtitle', value)}
-                        className="text-xl mb-12 text-gray-950"
+                        fontSize="xl"
+                        color="white"
+                        textAlign="center"
+                        maxW="3xl"
                     />
-                </div>
-
-                <div className="container mx-auto px-6 relative w-1/4">
                     <SkoolComponent />
-                </div>
-            </div>
-            {isEditing && (
-                <div className="fixed inset-0 z-[100] bg-black bg-opacity-75 flex items-center justify-center p-8">
-                    <div className="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-6">Edit Text</h3>
-                        <input
-                            type="text"
-                            value={editValue}
-                            onChange={(e) => setEditValue(e.target.value)}
-                            className="w-full p-2 mb-4 border rounded text-gray-900"
-                        />
-                        <div className="flex justify-end gap-4">
-                            <button
-                                onClick={() => setIsEditing(false)}
-                                className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-300 transition-colors"
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                onClick={() => {
-                                    handleContentSave(editField, editValue);
-                                    setIsEditing(false);
-                                }}
-                                className="bg-yellow-500 text-black px-6 py-3 rounded-lg text-lg font-semibold hover:bg-yellow-600 transition-colors"
-                            >
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </section>
+                </VStack>
+            </Container>
+        </Box>
     );
 };
 

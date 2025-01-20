@@ -2,24 +2,25 @@
     "pages": {
         "landing": {
             "hero": {
-                "title": "Welcome to Performen",
-                "subtitle": "Your journey to peak performance starts here",
+                "title": "Transforme ton corps,\nTransforme ta vie",
+                "subtitle": "Coach spécialisé dans la perte de poids pour hommes",
                 "image": "",
-                "cta_label": "Get Started"
+                "cta_label": "Réserve ta consultation"
             },
             "whoami": {
-                "title": "Who Am I?",
-                "content": "Hi, I'm Aiden Anis.\n\nI'm a fitness coach dedicated to helping men transform their lives through holistic wellness. With years of experience and a passion for personal development, I guide my clients to achieve not just physical fitness, but overall life improvement.\n\nMy approach combines cutting-edge training techniques with mental conditioning, ensuring sustainable results that last a lifetime.",
+                "title": "QUI SOMMES-NOUS ?",
+                "name": "Aiden Anis",
+                "description": "Je m'appelle Aiden Anis et je suis pratiquant de fitness depuis l'âge de 13 ans. Issu d'une famille de médecins, j'ai rapidement découvert l'importance de l'entraînement physique dans la santé globale. Mon parcours m'a mené à Paris pour étudier la nutrition, puis à Montréal, où j'ai obtenu ma certification de coach sportif.\n\nAu fil des ans, j'ai eu l'opportunité de travailler dans des environnements dynamiques tels que World Gym Québec et Elite Coaching, en plus de mon expérience comme coach travailleur autonome. J'ai eu la chance de guider plus d'une centaine de personnes — hommes, femmes et adolescents — et de travailler avec des athlètes que j'ai aidés à atteindre leurs objectifs de compétition.\n\nMais au-delà de ces expériences, j'ai trouvé ma véritable mission dans la perte de poids pour les hommes. Mon approche allie santé holistique et transformation physique pour libérer le potentiel de changement d'identité qui accompagne chaque parcours de remise en forme. Mon objectif est de vous aider à non seulement perdre du poids, mais aussi à transformer votre vie en alignant votre corps et votre esprit.",
                 "image": ""
+            },
+            "action": {
+                "title": "Il est temps d'agir",
+                "subtitle": "Ne laisse pas passer cette opportunité de transformer ta vie. Commence ton voyage vers une meilleure version de toi dès aujourd'hui.",
+                "cta_label": "Réserve ta consultation"
             },
             "community": {
                 "title": "Rejoins La Confrérie",
                 "subtitle": "Confrérie visant la perte de poids et la perfection de l'être. Rejoins une communauté d'hommes déterminés à transformer leur vie."
-            },
-            "cta": {
-                "title": "Ready to Transform Your Life?",
-                "subtitle": "Take the first step towards your peak performance journey",
-                "button_label": "Schedule a Call"
             }
         }
     }

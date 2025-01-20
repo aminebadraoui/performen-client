@@ -7,55 +7,50 @@ import EditableText from './EditableText';
 const TimeToTakeAction = () => {
     const { openCalendly } = useModalStore();
     const { content, updateContent } = useContentStore();
-    const pageContent = content.pages.landing;
-    const buttonBg = useColorModeValue('yellow.400', 'yellow.500');
-    const buttonHoverBg = useColorModeValue('yellow.500', 'yellow.600');
+    const pageContent = content?.pages?.landing;
+    const buttonBg = useColorModeValue('black', 'black');
+    const buttonHoverBg = useColorModeValue('gray.800', 'gray.800');
 
     const handleContentSave = (field, value) => {
-        updateContent('landing', 'cta', field, value);
+        updateContent('landing', 'action', field, value);
     };
 
+    if (!pageContent?.action) {
+        return null;
+    }
+
     return (
-        <Box as="section" bg="black" py={{ base: 16, md: 24 }}>
+        <Box as="section" py={{ base: 16, md: 24 }}>
             <Container maxW="container.xl" px={6}>
-                <VStack spacing={8} align="center">
+                <VStack spacing={8}>
                     <EditableText
-                        content={pageContent.cta.title}
+                        content={pageContent.action.title}
                         onSave={(value) => handleContentSave('title', value)}
                         fontSize="4xl"
                         fontWeight="bold"
-                        color="white"
+                        color="black"
                         textAlign="center"
-                        as="h2"
                     />
                     <EditableText
-                        content={pageContent.cta.subtitle}
+                        content={pageContent.action.subtitle}
                         onSave={(value) => handleContentSave('subtitle', value)}
                         fontSize="xl"
-                        color="gray.300"
+                        color="gray.700"
                         textAlign="center"
+                        maxW="3xl"
                     />
-                    <Box position="relative" display="inline-block">
-                        <Box display="inline-flex" alignItems="center" gap={4}>
-                            <Button
-                                onClick={openCalendly}
-                                bg={buttonBg}
-                                color="black"
-                                px={8}
-                                py={6}
-                                fontSize="xl"
-                                fontWeight="semibold"
-                                _hover={{ bg: buttonHoverBg }}
-                            >
-                                {pageContent.cta.button_label}
-                            </Button>
-                            <EditableText
-                                content={pageContent.cta.button_label}
-                                onSave={(value) => handleContentSave('button_label', value)}
-                                display="none"
-                            />
-                        </Box>
-                    </Box>
+                    <Button
+                        onClick={openCalendly}
+                        bg={buttonBg}
+                        color="white"
+                        px={8}
+                        py={6}
+                        fontSize="xl"
+                        fontWeight="semibold"
+                        _hover={{ bg: buttonHoverBg }}
+                    >
+                        {pageContent.action.cta_label}
+                    </Button>
                 </VStack>
             </Container>
         </Box>

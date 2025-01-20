@@ -8,7 +8,7 @@ import EditableImage from './EditableImage';
 import WhoAmI from './WhoAmI';
 import Community from './Community';
 import TimeToTakeAction from './TimeToTakeAction';
-import ContactForm from './ContactForm';
+import GoogleReviews from './GoogleReviews';
 import CalendlyModal from './CalendlyModal';
 import Footer from './Footer';
 
@@ -35,15 +35,16 @@ const LandingPage = () => {
     };
 
     if (isLoading || !content) {
-        return <Box minH="100vh" bg="black" />;
+        return <Box minH="100vh" bg="gray.900" />;
     }
 
     const pageContent = content.pages.landing;
 
     return (
-        <Box minH="100vh" bg="black" color="white">
-            <main>
-                <Box as="section" py={{ base: 12, md: 24 }}>
+        <>
+            <Box as="main">
+                {/* Hero Section - Black */}
+                <Box as="section" bg="black" py={{ base: 12, md: 24 }}>
                     <Container maxW="container.xl" px={6}>
                         <Box display="flex" flexDirection={{ base: 'column', md: 'row' }} alignItems="center" gap={8}>
                             <Box flex={1} position="relative" h={{ base: "500px", md: "700px" }} mb={{ base: 8, md: 0 }}>
@@ -105,12 +106,30 @@ const LandingPage = () => {
                         </Box>
                     </Container>
                 </Box>
-                <WhoAmI />
-                <Community />
-                <TimeToTakeAction />
-                <ContactForm />
-            </main>
-            <Footer />
+
+                {/* Who Am I Section - White */}
+                <Box bg="white">
+                    <WhoAmI />
+                </Box>
+
+                {/* Community Section - Black */}
+                <Box bg="black">
+                    <Community />
+                </Box>
+
+                {/* Google Reviews Section - White */}
+                <Box bg="white">
+                    <GoogleReviews />
+                </Box>
+
+                {/* Time to Take Action Section */}
+                <Box bg="yellow.400">
+                    <TimeToTakeAction />
+                </Box>
+
+                {/* Footer */}
+                <Footer />
+            </Box>
             <CalendlyModal isOpen={isCalendlyOpen} onClose={closeCalendly} />
             <Modal isOpen={isEditing} onClose={() => setIsEditing(false)}>
                 <ModalOverlay />
@@ -133,7 +152,7 @@ const LandingPage = () => {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-        </Box>
+        </>
     );
 };
 
