@@ -54,7 +54,7 @@ const UnderConstruction = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Entrez le mot de passe"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-gray-900 placeholder-gray-500"
                     />
                     <motion.button
                         whileHover={{ scale: 1.05 }}

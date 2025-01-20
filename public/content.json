@@ -1,16 +1,26 @@
 {
-    "hero": {
-        "title": "Welcome to Performen",
-        "subtitle": "Your journey to peak performance starts here",
-        "image": "https://performen-dashboard.mnfstagency.com/assets/your-image.jpg",
-        "cta_label": "Get Started"
-    },
-    "whoami": {
-        "title": "QUI SOMMES-NOUS ?",
-        "content": "Je m'appelle Aiden Anis et je suis pratiquant de fitness depuis l'âge de 13 ans. Issu d'une famille de médecins, j'ai rapidement découvert l'importance de l'entraînement physique dans la santé globale. Mon parcours m'a mené à Paris pour étudier la nutrition, puis à Montréal, où j'ai obtenu ma certification de coach sportif."
-    },
-    "community": {
-        "title": "Rejoins La Confrérie",
-        "subtitle": "Confrérie visant la perte de poids et la perfection de l'être. Rejoins une communauté d'hommes déterminés à transformer leur vie."
+    "pages": {
+        "landing": {
+            "hero": {
+                "title": "Welcome to Performen",
+                "subtitle": "Your journey to peak performance starts here",
+                "image": "",
+                "cta_label": "Get Started"
+            },
+            "whoami": {
+                "title": "QUI SOMMES-NOUS ?",
+                "content": "Je m'appelle Aiden Anis et je suis pratiquant de fitness depuis l'âge de 13 ans. Issu d'une famille de médecins, j'ai rapidement découvert l'importance de l'entraînement physique dans la santé globale. Mon parcours m'a mené à Paris pour étudier la nutrition, puis à Montréal, où j'ai obtenu ma certification de coach sportif.\n\nMa passion pour le fitness et la santé m'a conduit à développer une approche holistique du bien-être, combinant entraînement physique, nutrition et développement personnel. Je crois fermement que chacun a le potentiel de transformer sa vie et d'atteindre ses objectifs, avec le bon accompagnement et la bonne mentalité.\n\nAujourd'hui, je mets mon expertise au service des autres, aidant mes clients à surmonter leurs obstacles et à devenir la meilleure version d'eux-mêmes. Mon approche personnalisée tient compte de vos objectifs spécifiques, de votre mode de vie et de vos contraintes pour créer un programme sur mesure qui vous correspond.",
+                "image": ""
+            },
+            "community": {
+                "title": "Rejoins La Confrérie",
+                "subtitle": "Confrérie visant la perte de poids et la perfection de l'être. Rejoins une communauté d'hommes déterminés à transformer leur vie."
+            },
+            "action": {
+                "title": "Il est temps d'agir",
+                "subtitle": "Ne laisse pas passer cette opportunité de transformer ta vie. Commence ton voyage vers une meilleure version de toi dès aujourd'hui.",
+                "cta_label": "Réserve ta consultation"
+            }
+        }
     }
 }

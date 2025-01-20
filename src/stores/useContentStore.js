@@ -12,7 +12,14 @@ const defaultContent = {
             },
             whoami: {
                 title: "QUI SOMMES-NOUS ?",
-                content: "Je m'appelle Aiden Anis et je suis pratiquant de fitness depuis l'âge de 13 ans. Issu d'une famille de médecins, j'ai rapidement découvert l'importance de l'entraînement physique dans la santé globale. Mon parcours m'a mené à Paris pour étudier la nutrition, puis à Montréal, où j'ai obtenu ma certification de coach sportif."
+                name: "Aiden Anis",
+                description: "Je m'appelle Aiden Anis et je suis pratiquant de fitness depuis l'âge de 13 ans. Issu d'une famille de médecins, j'ai rapidement découvert l'importance de l'entraînement physique dans la santé globale. Mon parcours m'a mené à Paris pour étudier la nutrition, puis à Montréal, où j'ai obtenu ma certification de coach sportif.\n\nAu fil des ans, j'ai eu l'opportunité de travailler dans des environnements dynamiques tels que World Gym Québec et Elite Coaching, en plus de mon expérience comme coach travailleur autonome. J'ai eu la chance de guider plus d'une centaine de personnes — hommes, femmes et adolescents — et de travailler avec des athlètes que j'ai aidés à atteindre leurs objectifs de compétition.\n\nMais au-delà de ces expériences, j'ai trouvé ma véritable mission dans la perte de poids pour les hommes. Mon approche allie santé holistique et transformation physique pour libérer le potentiel de changement d'identité qui accompagne chaque parcours de remise en forme. Mon objectif est de vous aider à non seulement perdre du poids, mais aussi à transformer votre vie en alignant votre corps et votre esprit.",
+                image: "/assets/Anis-Rings.jpg"
+            },
+            action: {
+                title: "Il est temps d'agir",
+                subtitle: "Ne laisse pas passer cette opportunité de transformer ta vie. Commence ton voyage vers une meilleure version de toi dès aujourd'hui.",
+                cta_label: "Réserve ta consultation"
             },
             community: {
                 title: "Rejoins La Confrérie",
