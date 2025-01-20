@@ -2,7 +2,8 @@
     "pages": {
         "landing": {
             "hero": {
-                "title": "Transforme ton corps,\nTransforme ta vie",
+                "title": "Transforme ton corps",
+                "titleHighlight": "Transforme ta vie",
                 "subtitle": "Coach spécialisé dans la perte de poids pour hommes",
                 "image": "",
                 "cta_label": "Réserve ta consultation"

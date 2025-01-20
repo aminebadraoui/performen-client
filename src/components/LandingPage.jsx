@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Container, VStack, Button, useColorModeValue, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input } from '@chakra-ui/react';
+import { Box, Container, VStack, Button, useColorModeValue, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input, Text } from '@chakra-ui/react';
 import useModalStore from '../stores/useModalStore';
 import useContentStore from '../stores/useContentStore';
 import useAuthStore from '../stores/useAuthStore';
@@ -66,14 +66,24 @@ const LandingPage = () => {
                                 />
                             </Box>
                             <VStack flex={1} align="start" spacing={6}>
-                                <EditableText
-                                    content={pageContent.hero.title}
-                                    onSave={(value) => handleContentSave('hero', 'title', value)}
-                                    fontSize="6xl"
-                                    fontWeight="bold"
-                                    color="white"
-                                    as="h1"
-                                />
+                                <Box>
+                                    <EditableText
+                                        content={pageContent.hero.title}
+                                        onSave={(value) => handleContentSave('hero', 'title', value)}
+                                        fontSize="6xl"
+                                        fontWeight="bold"
+                                        color="white"
+                                        lineHeight="1.2"
+                                    />
+                                    <EditableText
+                                        content={pageContent.hero.titleHighlight}
+                                        onSave={(value) => handleContentSave('hero', 'titleHighlight', value)}
+                                        fontSize="6xl"
+                                        fontWeight="bold"
+                                        color="yellow.400"
+                                        lineHeight="1.2"
+                                    />
+                                </Box>
                                 <EditableText
                                     content={pageContent.hero.subtitle}
                                     onSave={(value) => handleContentSave('hero', 'subtitle', value)}
